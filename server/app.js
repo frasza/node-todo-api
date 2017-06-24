@@ -8,6 +8,7 @@ var {Todo} = require('./models/todo');
 var {User} = require('./models/user');
 var {ObjectID} = require('mongodb');
 
+var port = process.env.PORT || 3000;
 
 //Midlewares
 app.use(bodyParser.json());
@@ -56,8 +57,8 @@ app.get('/todos/:id', (req, res) => {
 
 
 // Server listen
-app.listen(3000, () => {
-    console.log('Server is listening on port 3000.');
+app.listen(port, () => {
+    console.log(`Server is listening on port ${port}.`);
 });
 
 module.exports = { app };
