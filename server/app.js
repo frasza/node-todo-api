@@ -26,7 +26,6 @@ app.post('/todos', (req, res) => {
 });
 
 // GET
-
 app.get('/todos', (req, res) => {
     Todo.find().then((todos) => {
         res.send({todos});
@@ -35,7 +34,23 @@ app.get('/todos', (req, res) => {
     });
 });
 
+// GET /:id
+app.get('/todos/:id', (req, res) => {
+    var id = req.params.id;
 
+    Todo.findById(id).then((todo) => {
+        if (!todo) {
+            res.status(404).send({});
+        }
+
+        res.send(todo);
+    }).catch((err) => {
+        res.status(400).send({});
+    });
+});
+
+
+// Server listen
 app.listen(3000, () => {
     console.log('Server is listening on port 3000.');
 });
